@@ -7,6 +7,7 @@
     <!--wrapper-->
     <div class="wrapper">
 
+        <x-admin-side-bar></x-admin-side-bar>
         <!--start header -->
         <header>
             <div class="topbar d-flex align-items-center">
