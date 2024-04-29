@@ -37,6 +37,11 @@
                if ($(this).parsley().validate()) {
                    f.preventDefault();
                    var formData = new FormData(this);
+                   var html =
+                       '<button class="btn btn-primary" type="button" disabled=""> <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loading...';
+                   var html1 =
+                       ' <input type="submit" id="submitButton" class="btn btn-primary px-4" value = "Save" / > ';
+                   $('#submitButton').html(html);
                    $.ajax({
                        type: 'POST',
                        url: $(this).attr('action'),
@@ -45,9 +50,15 @@
                        contentType: false,
                        processData: false,
                        success: function(result) {
-                           console.log(result);
+                           //    console.log(result);
+                           if (result.status === 'Success') {
+                               $('#submitButton').html(html1);
+                           } else {
+                               $('#submitButton').html(html1);
+                           }
                        }
                    });
+
                }
            });
        });

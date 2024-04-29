@@ -7,9 +7,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\ApiResponse;
 
 class ProfileController extends Controller
 {
+    use ApiResponse;
     public function index()
     {
         return view('admin.profile');
@@ -26,11 +28,14 @@ class ProfileController extends Controller
         ]);
 
         if ($validation->fails()) {
-            return response()->json(['status' => 400, 'message' => $validation->errors()->first()]);
+            return $this->error($validation->errors()->first(), 400);
+            // return response()->json(['status' => 400, 'message' => $validation->errors()->first()]);
         } else {
             if ($request->hasFile('image')) {
                 $image_name = 'images/' . $request->name . time() . '.' . $request->image->extension();
                 $request->image->move(public_path('images/'), $image_name);
+            } else {
+                $image_name = Auth::User()->image;
             }
             $user = User::updateOrCreate(
                 ['id' => Auth::User()->id],
@@ -41,7 +46,8 @@ class ProfileController extends Controller
                     'instagram' => $request->instagram,
                 ]
             );
-            return response()->json(['status' => 200, 'message' => 'Successfully updated']);
+            // return response()->json(['status' => 200, 'message' => 'Successfully updated']);
+            return $this->success([], 'Successfully updated');
         }
     }
 }
