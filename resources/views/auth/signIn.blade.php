@@ -41,7 +41,8 @@
                                             <div class="col-12">
                                                 <label for="inputEmailAddress" class="form-label">Email Address</label>
                                                 <input type="email" name="email" class="form-control"
-                                                    id="inputEmailAddress" placeholder="Email Address" required>
+                                                    value="admin@gmail.com" id="inputEmailAddress"
+                                                    placeholder="Email Address" required>
                                             </div>
                                             <div class="col-12">
                                                 <label for="inputChoosePassword" class="form-label">Enter
@@ -97,7 +98,8 @@
                 type: 'post',
                 success: function(result) {
                     if (result.status == 200) {
-                        alert('Succesfully submit');
+                        // alert('Succesfully submit');
+                        window.location.href = result.url;
                     } else {
                         alert('Wrong Credentials');
                     }

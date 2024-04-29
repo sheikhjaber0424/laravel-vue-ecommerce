@@ -22,7 +22,7 @@ class AuthController extends Controller
             $credentials = array('email' => $request->email, 'password' => $request->password);
             if (Auth::attempt($credentials, false)) { //if credentials are not false
                 if (Auth::User()->hasRole('admin')) {
-                    return response()->json(['status' => 200, 'message' => 'Admin User']);
+                    return response()->json(['status' => 200, 'message' => 'Admin User', 'url' => 'admin/dashboard']);
                 } else {
                     return response()->json(['status' => 200, 'message' => 'Not Admin User']);
                 }
