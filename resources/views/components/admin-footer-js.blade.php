@@ -30,3 +30,25 @@
            });
        });
    </script>
+
+   <script>
+       $(document).ready(function(e) {
+           $("#formSubmit").on('submit', function(f) {
+               if ($(this).parsley().validate()) {
+                   f.preventDefault();
+                   var formData = new FormData(this);
+                   $.ajax({
+                       type: 'POST',
+                       url: $(this).attr('action'),
+                       data: formData,
+                       cache: false,
+                       contentType: false,
+                       processData: false,
+                       success: function(result) {
+                           console.log(result);
+                       }
+                   });
+               }
+           });
+       });
+   </script>

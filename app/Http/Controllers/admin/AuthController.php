@@ -18,7 +18,6 @@ class AuthController extends Controller
         $user->password = Hash::make('12345678');
         $user->save();
         $admin = Role::where('slug', 'admin')->first();
-
         $user->roles()->attach($admin);
     }
 }

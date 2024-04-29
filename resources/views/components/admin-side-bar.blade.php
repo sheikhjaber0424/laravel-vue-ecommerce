@@ -75,7 +75,7 @@
          <li class="menu-label">Pages</li>
 
          <li>
-             <a href="user-profile.html">
+             <a href="{{ url('admin/profile') }}">
                  <div class="parent-icon"><i class="bx bx-user-circle"></i>
                  </div>
                  <div class="menu-title">User Profile</div>
