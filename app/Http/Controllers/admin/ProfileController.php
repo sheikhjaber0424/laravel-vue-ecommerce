@@ -28,7 +28,7 @@ class ProfileController extends Controller
         ]);
 
         if ($validation->fails()) {
-            return $this->error($validation->errors()->first(), 400);
+            return $this->error($validation->errors()->first(), 200, []);
             // return response()->json(['status' => 400, 'message' => $validation->errors()->first()]);
         } else {
             if ($request->hasFile('image')) {

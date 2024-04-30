@@ -10,9 +10,14 @@
    <script src="{{ asset('assets/plugins/chartjs/js/Chart.min.js') }}"></script>
    <script src="{{ asset('assets/plugins/chartjs/js/Chart.extension.js') }}"></script>
    <script src="{{ asset('assets/js/index.js') }}"></script>
+
    <!--app JS-->
    <script src="{{ asset('assets/js/app.js') }}"></script>
    <script src="https://developercodez.com/developerCorner/parsley/parsley.min.js"></script>
+   <script src="{{ asset('snackbar/dist/js-snackbar.js') }}"></script>
+   <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+   <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+
 
    <script>
        $(document).ready(function() {
@@ -49,11 +54,26 @@
                        cache: false,
                        contentType: false,
                        processData: false,
+
                        success: function(result) {
                            //    console.log(result);
                            if (result.status === 'Success') {
+                               SnackBar({
+                                   status: result.status,
+                                   message: result.message,
+                                   position: "br"
+                               });
+                               console.log(result.status);
                                $('#submitButton').html(html1);
+                               if (result.data.reload) {
+                                   window.location.href = window.location.href;
+                               }
                            } else {
+                               SnackBar({
+                                   status: result.status,
+                                   message: result.message,
+                                   position: "br"
+                               });
                                $('#submitButton').html(html1);
                            }
                        }
@@ -62,4 +82,60 @@
                }
            });
        });
+   </script>
+
+   <script>
+       $(document).ready(function() {
+           $('#example').DataTable();
+       });
+   </script>
+   <script>
+       $(document).ready(function() {
+           var table = $('#example2').DataTable({
+               lengthChange: false,
+               buttons: ['copy', 'excel', 'pdf', 'print']
+           });
+
+           table.buttons().container()
+               .appendTo('#example2_wrapper .col-md-6:eq(0)');
+       });
+   </script>
+
+   <script>
+       function deleteData(id, table) {
+           if (confirm("Confirm to delete!") == true) {
+               $.ajax({
+                   type: 'GET',
+                   url: "{{ url('admin/deleteData') }}/" + id + "/" + table + "",
+                   data: '',
+                   cache: false,
+                   contentType: false,
+                   processData: false,
+
+                   success: function(result) {
+                       //    console.log(result);
+                       if (result.status === 'Success') {
+                           SnackBar({
+                               status: result.status,
+                               message: result.message,
+                               position: "br"
+                           });
+                           console.log(result.status);
+
+                           if (result.data.reload) {
+                               window.location.href = window.location.href;
+                           }
+                       } else {
+                           SnackBar({
+                               status: result.status,
+                               message: result.message,
+                               position: "br"
+                           });
+                           $('#submitButton').html(html1);
+                       }
+                   }
+               });
+           }
+
+       }
    </script>
