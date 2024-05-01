@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AttributeController;
+use App\Http\Controllers\admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\HomeBannerController;
@@ -28,7 +29,13 @@ Route::post('/update-attribute-name', [AttributeController::class, 'storeAttribu
 Route::get('/attribute-value', [AttributeController::class, 'attributeValueIndex']);
 Route::post('/update-attribute-value', [AttributeController::class, 'storeAttributeValue']);
 
+//Category
+Route::get('/category-index', [CategoryController::class, 'index']);
+Route::post('/update-category', [CategoryController::class, 'store']);
 
+//Category Attribute
+Route::get('/category-attribute', [CategoryController::class, 'indexCategoryAttribute']);
+Route::post('/update-category-attribute', [CategoryController::class, 'storeCategoryAttribute']);
 
 
 //Delete Data

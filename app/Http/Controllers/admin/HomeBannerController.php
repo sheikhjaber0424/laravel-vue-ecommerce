@@ -50,7 +50,7 @@ class HomeBannerController extends Controller
             HomeBanner::updateOrCreate(
                 ['id' => $request->id],
                 [
-                    'text' =>  $request->text, 'link' =>  $request->link, 'image' =>   $image_name
+                    'text' =>  $request->text, 'link' =>  $request->link, 'image' =>  $image_name
                 ]
             );
             return $this->success(['reload' => true], 'Successfully updated');

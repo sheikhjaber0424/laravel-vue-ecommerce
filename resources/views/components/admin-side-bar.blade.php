@@ -67,6 +67,23 @@
 
              </ul>
          </li>
+         <li>
+             <a href="javascript:;" class="has-arrow">
+                 <div class="parent-icon"><i class='bx bx-cart'></i>
+                 </div>
+                 <div class="menu-title">Category</div>
+             </a>
+             <ul>
+                 <li> <a href="{{ url('admin/category-index') }}"><i class="bx bx-right-arrow-alt"></i>
+                         Categories</a>
+                 </li>
+                 <li> <a href="{{ url('admin/category-attribute') }}"><i class="bx bx-right-arrow-alt"></i>
+                         Category Attributes</a>
+                 </li>
+
+
+             </ul>
+         </li>
 
 
          <li class="menu-label">Pages</li>
