@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AttributeController;
+use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\DashboardController;
@@ -36,6 +37,10 @@ Route::post('/update-category', [CategoryController::class, 'store']);
 //Category Attribute
 Route::get('/category-attribute', [CategoryController::class, 'indexCategoryAttribute']);
 Route::post('/update-category-attribute', [CategoryController::class, 'storeCategoryAttribute']);
+
+//brand
+Route::get('/brand', [BrandController::class, 'index']);
+Route::post('/update-brand', [BrandController::class, 'store']);
 
 
 //Delete Data
