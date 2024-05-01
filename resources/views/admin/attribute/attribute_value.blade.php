@@ -48,8 +48,7 @@
                                     <th>ID</th>
                                     <th>Attribute Name</th>
                                     <th>Value</th>
-                                    <th>Created at</th>
-                                    <th>Updated at</th>
+
                                     <th>Actions</th>
                                 </tr>
 
@@ -60,13 +59,12 @@
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->singleAttribute->name }}</td>
                                         <td>{{ $item->value }}</td>
-                                        <td>{{ $item->created_at }}</td>
-                                        <td>{{ $item->updated_at }}</td>
+
                                         <td><button type="button"
                                                 onclick="saveData('{{ $item->id }}','{{ $item->attribute_id }}','{{ $item->value }}')"
                                                 class="btn btn-outline-primary px-3 mb-1" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal">Edit</button>
-                                            <button onclick="deleteData('{{ $item->id }}','attributes')"
+                                            <button onclick="deleteData('{{ $item->id }}','attribute_values')"
                                                 class="btn btn-outline-danger px-3 mb-1">Delete </button>
                                         </td>
 
@@ -111,21 +109,23 @@
                             <hr>
                             <input type="hidden" name="id" id="enter_id">
                             <div class="row mb-3">
-                                <label for="inputEnterYourName" class="col-sm-3 col-form-label">Text</label>
+                                <label for="inputEnterYourName" class="col-sm-3 col-form-label">Attribute Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="name" class="form-control" id="enter_name"
-                                        placeholder="Enter Attribute Name" required>
+                                    <select class="form-select" name="attribute_id" id="enter_attribute_id">
+                                        @foreach ($arrtibutes as $arrtibute)
+                                            <option value="{{ $arrtibute->id }}">{{ $arrtibute->name }}</option>
+                                        @endforeach
+
+                                    </select>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="enter_slug" class="col-sm-3 col-form-label">Link</label>
+                                <label for="value" class="col-sm-3 col-form-label">Value</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="slug" class="form-control" id="enter_slug"
-                                        placeholder="Slug" required>
+                                    <input type="text" name="value" class="form-control" id="enter_value"
+                                        placeholder="Value" required>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -140,10 +140,10 @@
     </div>
 
     <script>
-        function saveData(id, name, slug) {
+        function saveData(id, attribute_id, value) {
             $('#enter_id').val(id);
-            $('#enter_name').val(name);
-            $('#enter_slug').val(slug);
+            $('#enter_attribute_id').val(attribute_id);
+            $('#enter_value').val(value);
         }
     </script>
 @endsection

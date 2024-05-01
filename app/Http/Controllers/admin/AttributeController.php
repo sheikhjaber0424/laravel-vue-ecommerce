@@ -48,7 +48,7 @@ class AttributeController extends Controller
         $data = AttributeValue::with('singleAttribute')->get();
         $arrtibutes = Attribute::get();
 
-        return view('admin.attribute.attribute_value', compact('data'));
+        return view('admin.attribute.attribute_value', compact('data', 'arrtibutes'));
     }
     public function storeAttributeValue(Request $request)
     {
