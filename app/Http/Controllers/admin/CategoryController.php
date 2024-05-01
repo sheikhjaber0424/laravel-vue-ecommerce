@@ -79,13 +79,28 @@ class CategoryController extends Controller
     public function indexCategoryAttribute()
     {
         $data = CategoryAttribute::with('category', 'attribute')->get();
-        $category = Category::get();
-        $attribute = Attribute::get();
-        return view('admin.category.category', compact('data', 'category', 'attribute'));
+        $categories = Category::get();
+        $attributes = Attribute::get();
+        return view('admin.category.categoryAttribute', compact('data', 'categories', 'attributes'));
         // return $data->toArray();
     }
 
-    // public function storeCategoryAttribute()
-    // {
-    // }
+    public function storeCategoryAttribute(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'attribute_id'    => 'required|exists:attributes,id',
+            'category_id'    => 'required|exists:categories,id',
+        ]);
+        if ($validation->fails()) {
+            return $this->error($validation->errors()->first(), 400, []);
+        } else {
+            CategoryAttribute::updateOrCreate(
+                ['id' => $request->id],
+                [
+                    'category_id' => $request->category_id, 'attribute_id' => $request->attribute_id,
+                ]
+            );
+        }
+        return $this->success(['reload' => true], 'Successfully Updated');
+    }
 }

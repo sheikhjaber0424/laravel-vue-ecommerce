@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CategoryAttribute extends Model
 {
     use HasFactory;
-
+    protected $guarded = [];
     protected $table = 'category_attribute';
 
 
